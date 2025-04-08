@@ -1,40 +1,26 @@
+import 'dart:convert';
+import 'user.dart';
+
 class UserModel {
-    User user;
-    Sting token;
+  final User user;
+  final String token;
 
-    UserModel ({required this.user, required this.token});
+  UserModel({required this.user, required this.token});
 
-    UserModel userFromJson(String user) =>
-        UserModel.fromJson(json.decode(user));
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        user: User.fromJson(json['user']),
+        token: json['token'],
+      );
 
-    factory UserModel.userFromJson(Map<String, dynamic> json) =>
-        UserModel(
-            user: userFromJson(json['user']),
-            token: json['token'],
-        ); //Usermodel
-    Map<String, dynamic> fromObject() => {
-        "user" : user.fromObject(),
-        "token" : token,
-    }
-}
+  Map<String, dynamic> toJson() => {
+        "user": user.toJson(),
+        "token": token,
+      };
 
-class User {
-    String name;
-    String usergroup;
-    String email;
-    int phone;
-    String dateofbirth;
-    
-    User({required this.name, required this.usergroup, required this.email, required this.dateofbirth});
+  // Optional: convenience method for decoding from string
+  static UserModel fromRawJson(String str) =>
+      UserModel.fromJson(json.decode(str));
 
-    factory User.fromJson(Map<String, dynamic> json) => 
-        User(name: json['name'], usergroup: json['usergroup'] email: json['email'], dateofbirth: json['dateofbirth'], phone: ['phone']);
-
-    Map<String, dynamic> fromObject() => {
-        "name" : na`    `11me,
-        "email" : email,
-        "usergroup" : usergroup,
-        "dateofbirth" : dateofbirth,
-        "phone" : phone,
-    }
+  // Optional: convenience method for encoding to string
+  String toRawJson() => json.encode(toJson());
 }
