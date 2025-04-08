@@ -2,33 +2,34 @@
 
 Welcome to the **Dart User Model JSON Serialization** repository!
 
-This project showcases how to implement JSON serialization and deserialization for user models using Dart. It includes two key files: `user.dart` and `user_model.dart`, each focusing on different aspects of handling user data.
+This project provides a clean and efficient way to handle JSON serialization and deserialization for user-related data structures in Dart. It features two main components: `user.dart` and `user_model.dart`, each designed for a different level of data abstraction and complexity.
 
-## 📁 Files Overview
+## Files Overview
 
 ### `user.dart`
-- Defines a basic `User` class.
-- Utilizes the `json_annotation` package.
-- Supports easy conversion between `User` objects and JSON.
+- Defines a basic `User` class with fields like `name` and `email`.
+- Uses the `json_annotation` package for automatic JSON serialization.
+- Includes:
+  - `fromJson()` factory constructor for parsing from JSON.
+  - `toJson()` method for converting to JSON.
+- This file requires code generation using the `build_runner` tool.
 
 ### `user_model.dart`
-- Extends the `User` class to create a more detailed `UserModel`.
-- Adds fields like `token`, `usergroup`, `phone`, and `dateofbirth`.
-- Uses manual JSON serialization for more flexibility.
+- Wraps the `User` class into a more detailed `UserModel`.
+- Adds extra fields like `token`.
+- Manually handles JSON serialization and deserialization logic.
+- Offers helper methods for raw JSON string parsing (`fromRawJson` and `toRawJson`).
 
-## ⚙️ How to Use
+##  How to Use
 
 1. **Add Dependencies:**
-   - `json_annotation`
-   - `build_runner`
 
-2. **Run Code Generation Tools:**
-   Use `build_runner` to generate serialization code automatically.
+In your `pubspec.yaml`:
 
-3. **Serialization Methods:**
-   - Convert Dart objects to JSON with `toJson()`.
-   - Convert JSON to Dart objects with `fromJson()`.
+```yaml
+dependencies:
+  json_annotation: ^4.8.1
 
----
-
-This repository offers a lightweight, efficient solution for managing user data serialization in Dart applications.
+dev_dependencies:
+  build_runner: ^2.4.6
+  json_serializable: ^6.6.1
